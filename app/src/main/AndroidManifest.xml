@@ -10,16 +10,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FindViewByID">
         <activity
-            android:name="finlay.moray.uhi.myfilms.Page2"
-            android:exported="false" >
+            android:name=".ListOfFilms"
+            android:exported="false" />
+        <activity
+            android:name=".Page2"
+            android:exported="false">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="finlay.moray.uhi.myfilms.MainActivity" />
-
         </activity>
-
         <activity
-            android:name="finlay.moray.uhi.myfilms.MainActivity"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
