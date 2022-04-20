@@ -17,6 +17,7 @@ class ListOfFilms : AppCompatActivity() {
 
         binding = ActivityListOfFilmsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         binding.CinemaBtn.setOnClickListener { GotoNewCinema() }
         binding.FilmsBtn.setOnClickListener {GotoNewFilm() }
         //binding.ListBtn.setOnClickListener { GotoList() }

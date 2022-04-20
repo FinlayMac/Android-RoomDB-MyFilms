@@ -14,24 +14,28 @@ interface MyFilmsDao {
     @Delete
     fun deleteSingleCinema(CinemaToDelete: Cinema)
 
-    //deletes the contents of a whole table
-    @Query("DELETE FROM cinemas_table")
-    fun clearCinemaTable()
-
-
     @Insert
     fun insertNewFilm(NewFilm: Films)
 
     @Delete
     fun deleteSingleFilm(FilmToDelete: Films)
 
+
+    //deletes the contents of a whole table
+    @Query("DELETE FROM cinemas_table")
+    fun clearCinemaTable()
+
     //deletes the contents of a whole table
     @Query("DELETE FROM films_table")
     fun clearFilmsTable()
 
-
-
     @Query("SELECT * from cinemas_table ORDER BY cinema_name ASC")
     fun getAllCinemas(): List<Cinema>
+
+    @Query("SELECT cinema_id from cinemas_table WHERE cinema_name = :cinemaName")
+    fun getCinemaIDByName(cinemaName: String): Long
+
+
+
 }
 

@@ -7,6 +7,8 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import finlay.moray.uhi.myfilms.database.Cinema
+import finlay.moray.uhi.myfilms.database.Films
 import finlay.moray.uhi.myfilms.database.MyFilmsDao
 import finlay.moray.uhi.myfilms.database.MyFilmsDatabaseConnection
 import finlay.moray.uhi.myfilms.databinding.ActivityPage2Binding
@@ -27,10 +29,12 @@ class Page2 : AppCompatActivity() {
         dataSource = MyFilmsDatabaseConnection.getInstance(application).databaseDAO
 
         binding.CinemaBtn.setOnClickListener { GotoNewCinema() }
-        //binding.FilmsBtn.setOnClickListener {GotoNewFilm() }
+        //binding.FilmsBtn.setOnClickListener { GotoNewFilm() }
         binding.ListBtn.setOnClickListener { GotoList() }
 
-        SetupSelector()
+        binding.saveButton.setOnClickListener { AddNewFilm() }
+
+        SetupSpinner()
     }
 
     fun GotoNewCinema() {
@@ -46,13 +50,30 @@ class Page2 : AppCompatActivity() {
     }
 
 
-    fun SetupSelector() {
+    fun AddNewFilm() {
 
-        val spinner: Spinner = binding.cinemaSelector
+        var NewFilm = Films()
+        NewFilm.FilmName = binding.filmNameEdit.text.toString()
+        NewFilm.FilmRating = binding.filmRating.rating
+
+        val selectedCinema = binding.cinemaSelector.selectedItem.toString()
+        val loadedID = dataSource.getCinemaIDByName(selectedCinema)
+        NewFilm.CinemaID = loadedID
+
+        dataSource.insertNewFilm(NewFilm)
+
+        binding.filmNameEdit.setText("")
+        binding.filmRating.rating = 0f
+
+        Toast.makeText(this, "Saved Film", Toast.LENGTH_SHORT).show()
+    }
+
+
+    fun SetupSpinner() {
 
         val ListOfCinemas = dataSource.getAllCinemas()
 
-        if (ListOfCinemas.count() > 0 ) {
+        if (ListOfCinemas.count() > 0) {
             var cinemaNames: MutableList<String> = arrayListOf()
 
             for (cinema in ListOfCinemas) {
@@ -62,9 +83,9 @@ class Page2 : AppCompatActivity() {
             // Create an ArrayAdapter using a simple spinner layout and languages array
             val aa = ArrayAdapter(this, R.layout.simple_spinner_item, cinemaNames)
             // Set layout to use when the list of choices appear
-            aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            aa.setDropDownViewResource(R.layout.simple_spinner_dropdown_item)
             // Set Adapter to Spinner
-            spinner.setAdapter(aa)
+            binding.cinemaSelector.setAdapter(aa)
 
         } else {
             Toast.makeText(this, "Please add a cinema first", Toast.LENGTH_SHORT).show()

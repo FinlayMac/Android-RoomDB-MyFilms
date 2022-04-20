@@ -28,27 +28,31 @@ class MainActivity : AppCompatActivity() {
 
         binding.saveButton.setOnClickListener { ctx -> SaveAndShowSnackBar(ctx) }
 
-        //navigation
-       // binding.CinemaBtn.setOnClickListener {GotoNewCinema() }
-        binding.FilmsBtn.setOnClickListener {GotoNewFilm() }
-        binding.ListBtn.setOnClickListener {GotoList() }
-        binding.dropCinemaTable.setOnClickListener {DropCinemaTable() }
+        //binding.CinemaBtn.setOnClickListener { GotoNewCinema() }
+        binding.FilmsBtn.setOnClickListener { GotoNewFilm() }
+        binding.ListBtn.setOnClickListener { GotoList() }
+
+        binding.dropCinemaTable.setOnClickListener { DropCinemaTable() }
     }
 
     fun GotoNewCinema() {
         startActivity(Intent(this, MainActivity::class.java))
     }
+
     fun GotoNewFilm() {
         startActivity(Intent(this, Page2::class.java))
     }
+
     fun GotoList() {
         startActivity(Intent(this, ListOfFilms::class.java))
     }
 
-    fun DropCinemaTable(){
+
+    fun DropCinemaTable() {
         dataSource.clearCinemaTable()
         Toast.makeText(this, "Deleted all cinemas", Toast.LENGTH_SHORT).show()
     }
+
 
     fun SaveAndShowSnackBar(v: View) {
         Log.i("Save", "Save Button Pressed")
