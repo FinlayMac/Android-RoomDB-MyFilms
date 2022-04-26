@@ -35,7 +35,8 @@ interface MyFilmsDao {
     @Query("SELECT cinema_id from cinemas_table WHERE cinema_name = :cinemaName")
     fun getCinemaIDByName(cinemaName: String): Long
 
-
+    @Query("SELECT * from films_table ORDER BY film_id ASC")
+    fun getAllFilms(): List<Films>
 
 }
 
