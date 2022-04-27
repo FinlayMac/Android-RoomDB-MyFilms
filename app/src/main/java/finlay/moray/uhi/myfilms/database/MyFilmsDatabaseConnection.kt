@@ -38,7 +38,7 @@ abstract class MyFilmsDatabaseConnection: RoomDatabase() {
                         .allowMainThreadQueries()
                         .build()
                     println("instance 1")
-                    //TODO .allowMainTread is a workaround as I diddnt want to do corountines
+                    //TODO .allowMainTread is a workaround as I didnt want to do corountines
                     ///https://stackoverflow.com/questions/44167111/android-room-simple-select-query-cannot-access-database-on-the-main-thread/47773708
 
                     INSTANCE = instance

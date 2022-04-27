@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FindViewByID">
         <activity
+            android:name=".FilmView"
+            android:exported="false" />
+        <activity
             android:name=".ListOfFilms"
             android:exported="false" />
         <activity

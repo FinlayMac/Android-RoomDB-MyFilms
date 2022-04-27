@@ -67,8 +67,12 @@ class ListOfFilms : AppCompatActivity() {
     }
 
     fun GetMoreInformation(filmID: Long){
-        Toast.makeText(this, "$filmID", Toast.LENGTH_SHORT).show()
+      //  Toast.makeText(this, "$filmID", Toast.LENGTH_SHORT).show()
+        val myIntent = Intent(this, FilmView::class.java)
+        myIntent.putExtra("longFilmID", filmID)
+        startActivity(myIntent)
     }
+
 
     fun GotoNewCinema() {
         startActivity(Intent(this, MainActivity::class.java))
